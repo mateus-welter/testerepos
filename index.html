@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação do Projeto | Cadastro de Motores - CentroWEG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Desenvolvimento de Sistemas • Python</span>
+            <h1>Sistema de Cadastro de Motores</h1>
+            <p class="subtitle">Documentação técnica do protótipo CRUD desenvolvido em memória para gestão de especificações técnicas de motores elétricos.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- Seção de Contexto Institucional -->
+        <section class="card context-card">
+            <h2>Contexto do Desenvolvimento</h2>
+            <p>
+                Este projeto foi desenvolvido durante as atividades práticas do curso técnico no <strong>SENAI</strong>, 
+                realizado dentro da unidade educacional situada nas dependências da <strong>WEG</strong>, 
+                conhecida como <strong>CentroWEG</strong>, em <strong>Jaraguá do Sul - SC</strong>.
+            </p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Instituição</span>
+                    <strong>SENAI / CentroWEG</strong>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Localização</span>
+                    <strong>Jaraguá do Sul, Santa Catarina</strong>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Tecnologia</span>
+                    <strong>Python 3 (Estruturado)</strong>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Armazenamento</span>
+                    <strong>Memória Volátil (Listas/Dicionários)</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Explicação da Arquitetura -->
+        <section class="card">
+            <h2>Arquitetura e Funcionamento do Código</h2>
+            <p>
+                Para fins de validação de lógica e testes rápidos sem dependência de bancos de dados externos, 
+                a aplicação foi estruturada de forma <strong>monolítica</strong> em um único arquivo, dividindo responsabilidades em funções específicas:
+            </p>
+
+            <div class="functions-grid">
+                <div class="func-box">
+                    <h3><code>motores = []</code></h3>
+                    <p>Array (lista) global que atua como banco de dados em memória, armazenando cada motor como um dicionário com chaves estruturadas.</p>
+                </div>
+
+                <div class="func-box">
+                    <h3><code>gerar_novo_id()</code></h3>
+                    <p>Verifica o último registro inserido na lista e incrementa automaticamente o identificador único (Auto-Incremento).</p>
+                </div>
+
+                <div class="func-box">
+                    <h3><code>cadastrar_motor()</code></h3>
+                    <p>Coleta dados via terminal, valida entradas numéricas (CV e RPM) com blocos <code>try/except</code> e anexa o registro à lista.</p>
+                </div>
+
+                <div class="func-box">
+                    <h3><code>listar_motores()</code> &amp; <code>buscar_motor()</code></h3>
+                    <p>Percorre o array exibindo todos os registros ou filtrando resultados por ID exato ou correspondência parcial no nome do modelo.</p>
+                </div>
+
+                <div class="func-box">
+                    <h3><code>atualizar_motor()</code></h3>
+                    <p>Localiza o registro pelo ID e permite edição seletiva dos campos, mantendo os valores originais caso o usuário pressione Enter em branco.</p>
+                </div>
+
+                <div class="func-box">
+                    <h3><code>remover_motor()</code></h3>
+                    <p>Identifica o índice do motor desejado através da função <code>enumerate()</code> e remove o item da memória utilizando <code>.pop()</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Estrutura de Dados e Código -->
+        <section class="card">
+            <h2>Modelo de Dados e Implementação</h2>
+            <p>Cada motor cadastrado segue a estrutura de dicionário abaixo, pré-populada na inicialização com modelos de referência da linha industrial:</p>
+
+            <pre><code>{
+    "id": 1,
+    "modelo": "W22 IR3 Premium",
+    "fabricante": "WEG",
+    "potencia_cv": 10.0,
+    "rotacao_rpm": 1750,
+    "tensao_v": "220/380V"
+}</code></pre>
+
+            <h3>Exemplo do Loop Principal (Menu)</h3>
+            <pre><code>def menu_principal():
+    popular_dados_teste()
+    while True:
+        print("\n=== SISTEMA DE CADASTRO DE MOTORES ===")
+        print("1. Cadastrar | 2. Listar | 3. Buscar | 4. Atualizar | 5. Remover | 0. Sair")
+        opcao = input("Escolha uma opção: ").strip()
+        
+        if opcao == "1": cadastrar_motor()
+        elif opcao == "2": listar_motores()
+        elif opcao == "0": break</code></pre>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Projeto Acadêmico • SENAI CentroWEG • Jaraguá do Sul - SC</p>
+        </div>
+    </footer>
+
+</body>
+</html>
